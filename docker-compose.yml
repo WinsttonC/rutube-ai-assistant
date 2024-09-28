@@ -1,0 +1,42 @@
+services:
+  # chroma_db:
+  #   container_name: dv_hack_chroma_db
+  #   image: chromadb/chroma
+  #   volumes:
+  #     - ./chroma_data:/chroma/chroma
+  #   command: "--workers 1 --host 0.0.0.0 --port 8000 --proxy-headers --log-config chromadb/log_config.yml --timeout-keep-alive 30"
+  #   environment:
+  #     - IS_PERSISTENT=TRUE
+  #   restart: always
+  #   expose:
+  #     - 8000
+  #   healthcheck:
+  #     # Adjust below to match your container port
+  #     test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+  #     interval: 5s
+  #     timeout: 10s
+  #     retries: 3
+  #   networks:
+  #     - tinkoff_rec
+
+  backend:
+    container_name: rutube_backend
+    build: ./backend
+    volumes:
+      - ./backend/src:/src
+    ports:
+      - 8000:8000
+    networks:
+      - rutube
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/test"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+networks:
+  rutube:
+    name: rutube
+# volumes:
+#   tinkoff_chroma_vol:
+#     name: tinkoff_chroma_vol

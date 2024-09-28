@@ -1,0 +1,22 @@
+name: 'rutube-backend'
+replicaCount: 2
+labels: 
+  app: rutube-backend
+image:
+  repository: localhost:5000/rutube_backend
+  tag: latest
+  pullPolicy: IfNotPresent
+pod:
+  annotations: null
+  resources: null
+    # limits:
+    #   cpu:
+    #   memory:
+    # requests:
+    #   cpu:
+    #   memory:
+service:
+    containerPort: 80
+    port: 80
+    type: NodePort
+    
