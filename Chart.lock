@@ -1,0 +1,15 @@
+dependencies:
+- name: rutube-backend
+  repository: file://backend/.helm
+  version: 0.1.0
+- name: rutube-telegram
+  repository: file://telegram/.helm/
+  version: 0.1.0
+- name: chromadb
+  repository: file://chromadb/
+  version: 0.1.0
+- name: rutube-model
+  repository: file://model/.helm/
+  version: 0.1.0
+digest: sha256:da3fb18b76a20a577d1bd21cf636909b9ea0b3af4a5de95d35a1eeae8fb14496
+generated: "2024-09-29T12:24:34.119478478+10:00"

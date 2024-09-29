@@ -7,7 +7,7 @@ RUN pip install poetry
 COPY poetry.lock pyproject.toml ./
 RUN poetry install --no-interaction --no-ansi
 COPY server/ /app/src/
-EXPOSE 80
+EXPOSE 8000
 WORKDIR /app/src/
 #ENTRYPOINT gunicorn --reload -w 4 -b 0.0.0.0:8000 'app:app'
 ENTRYPOINT uvicorn --workers 8 --host 0.0.0.0 --port 80 app:app

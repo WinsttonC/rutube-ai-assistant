@@ -10,4 +10,4 @@ COPY src/ src/
 EXPOSE 8000
 WORKDIR src/
 #ENTRYPOINT gunicorn --reload -w 4 -b 0.0.0.0:8000 'app:app'
-ENTRYPOINT flask run --debug --host 0.0.0.0 --port 8000
+ENTRYPOINT python3 main.py

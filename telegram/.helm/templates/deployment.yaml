@@ -7,7 +7,9 @@ metadata:
   labels:
     {{- toYaml .labels | nindent 8 }}
 spec:
-  replicas: {{ .replicaCount }}
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- toYaml .labels | nindent 8 }}
@@ -28,10 +30,7 @@ spec:
           {{- if .resources }}
           resources:
             {{- toYaml .resources | nindent 12 }}
-          {{- end}}
-          ports:
-            - containerPort: {{ $.Values.service.containerPort }}
-              name: fastapi-port
+          {{- end }}
           envFrom:
           - configMapRef:
               name: {{ $.Values.configmap.name }}

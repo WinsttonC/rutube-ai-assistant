@@ -1,0 +1,6 @@
+dependencies:
+- name: chromadb
+  repository: https://amikos-tech.github.io/chromadb-chart/
+  version: 0.1.20
+digest: sha256:a9720cb030cdd4ba608d944154bd8084a5452dd80eb5c428bd4c193ab837f3e4
+generated: "2024-09-29T03:15:38.829821939+10:00"

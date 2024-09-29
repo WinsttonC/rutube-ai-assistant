@@ -1,22 +1,34 @@
-name: 'rutube-backend'
-replicaCount: 2
-labels: 
-  app: rutube-backend
-image:
-  repository: localhost:5000/rutube_backend
-  tag: latest
-  pullPolicy: IfNotPresent
-pod:
-  annotations: null
-  resources: null
-    # limits:
-    #   cpu:
-    #   memory:
-    # requests:
-    #   cpu:
-    #   memory:
+deployment:
+  annotations:
+  labels: 
+    app: rutube-backend
+  name: rutube-backend-deployment
+  replicaCount: 2
+  pod:
+    image:
+      repository: localhost:5000/rutube-backend
+      tag: latest
+      pullPolicy: Always
+    annotations: null
+    resources: null
+    name: rutube-backend-pod
+      # limits:
+      #   cpu:
+      #   memory:
+      # requests:
+      #   cpu:
+      #   memory:
 service:
-    containerPort: 80
-    port: 80
-    type: NodePort
+  name: rutube-backend-service
+  containerPort: 80
+  port: 80
+  type: NodePort
+
+configmap:
+  name: rutube-backend-configmap
+  values:
+    MODEL_API_BASE_URL: 'http://rutube-model-service'
     
+ingress:
+  name: rutube-backend-ingress
+  

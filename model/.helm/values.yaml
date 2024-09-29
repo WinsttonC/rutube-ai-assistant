@@ -1,0 +1,32 @@
+deployment:
+  labels: 
+    app: rutube-model
+  name: rutube-model-deployment
+  replicaCount: 1
+  pod:
+    name: rutube-model-pod
+    image:
+      repository: localhost:5000/rutube-model
+      tag: latest
+      pullPolicy: Always
+    annotations: null
+    resources: null
+      # limits:
+      #   cpu:
+      #   memory:
+      # requests:
+      #   cpu:
+      #   memory:
+service:
+  name: rutube-model-service
+  containerPort: 80
+  port: 80
+  type: NodePort
+
+configmap:
+  name: rutube-model-configmap
+  values:
+
+ingress:
+  name: rutube-model-ingress
+  
