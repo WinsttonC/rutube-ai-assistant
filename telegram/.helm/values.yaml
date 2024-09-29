@@ -1,0 +1,26 @@
+deployment:
+  annotations:
+  labels: 
+    app: rutube-telegram
+  name: rutube-telegram-deployment
+  pod:
+    name: rutube-telegram-pod
+    image:
+      repository: localhost:5000/rutube-telegram
+      tag: latest
+      pullPolicy: Always
+    annotations: null
+    resources: null
+      # limits:
+      #   cpu:
+      #   memory:
+      # requests:
+      #   cpu:
+      #   memory:
+configmap:
+  name: rutube-telegram-configmap
+  values:
+    BACKEND_BASE_URL: 'http://rutube-backend-service'
+    TELEGRAM_BOT_TOKEN: '7614008691:AAFIQqegkmn89ioF5J7ei7d4njbHXtoFSHM'
+
+  

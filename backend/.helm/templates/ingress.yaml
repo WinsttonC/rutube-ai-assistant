@@ -1,10 +1,14 @@
+{{- with .Values.ingress}}
 apiVersion: "networking.k8s.io/v1"
 kind: "Ingress"
 metadata:
-  name: "example-ingress"
+  name: {{ .name }}
+{{- end }}
 spec:
+  {{- with .Values.service }}
   defaultBackend:
     service:
-      name: {{ .Values.name }}-service
+      name: {{ .name }}
       port:
-        number: {{ .Values.service.port }}
+        number: {{ .port }}
+{{- end }}
