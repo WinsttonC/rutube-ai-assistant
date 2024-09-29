@@ -13,5 +13,5 @@ def test() -> TestResponse:
 
 @app.post("/predict")
 async def predict_sentiment(request: PredictRequest) -> PredictResponse:
-    result = PredictResponse(answer="hello", class_1="a", class_2="b")  # result = await predict(request)
+    result = await predict(request)
     return result

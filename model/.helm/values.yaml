@@ -26,6 +26,7 @@ service:
 configmap:
   name: rutube-model-configmap
   values:
+    TOKENIZERS_PARALLELISM: true
 
 ingress:
   name: rutube-model-ingress

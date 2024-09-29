@@ -1,5 +1,7 @@
 from models import PredictRequest, PredictResponse
+from utils import get_answer
 
 
 async def predict(request: PredictRequest) -> PredictResponse:
-    return PredictResponse(**{})
+    answer = get_answer(request.question)
+    return PredictResponse(**answer)

@@ -2,13 +2,9 @@ import chromadb
 from chromadb.api.types import EmbeddingFunction
 from typing import Dict, List, Any
 
+
 class ChromaDB:
-    def __init__(
-        self,
-        embedding: EmbeddingFunction,
-        collection_name: str,
-        db_path: str = './vector_db'
-    ) -> None:
+    def __init__(self, embedding: EmbeddingFunction, collection_name: str, db_path: str = "./vector_db") -> None:
         """
         Initializes the ChromaDB class for interacting with ChromaDB.
 
@@ -24,7 +20,7 @@ class ChromaDB:
         self.collection = self.chroma_client.get_or_create_collection(
             name=self.collection_name,
             embedding_function=self.embedding,
-            metadata={"hnsw:space": "cosine"}  # Options: 'l2', 'ip', 'cosine'
+            metadata={"hnsw:space": "cosine"},  # Options: 'l2', 'ip', 'cosine'
         )
 
     def add_documents(self, data_dict: Dict[str, List[Any]]) -> None:
@@ -32,10 +28,10 @@ class ChromaDB:
         Adds documents to the ChromaDB.
 
         Args:
-            data_dict (dict): Dictionary containing the documents. 
+            data_dict (dict): Dictionary containing the documents.
                               Must contain 'docs', 'cls_1', 'cls_2', 'sources', and 'ids' keys.
         """
-        required_keys = {'docs', 'cls_1', 'cls_2', 'sources', 'ids'}
+        required_keys = {"docs", "cls_1", "cls_2", "sources", "ids"}
         if not required_keys.issubset(data_dict.keys()):
             raise ValueError(f"data_dict must contain keys: {required_keys}")
 
@@ -45,11 +41,7 @@ class ChromaDB:
         sources = data_dict["sources"]
         ids = data_dict["ids"]
 
-        metadatas = [
-            {"source": sources[i],
-             "cls_1": cls_1[i],
-             "cls_2": cls_2[i]} for i in range(len(docs))
-        ]
+        metadatas = [{"source": sources[i], "cls_1": cls_1[i], "cls_2": cls_2[i]} for i in range(len(docs))]
 
         # Batch processing to avoid processing all documents at once
         batch_size = 100
