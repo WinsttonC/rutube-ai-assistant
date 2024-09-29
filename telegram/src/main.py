@@ -6,20 +6,18 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram import Bot, Dispatcher, Router, types
 from aiogram.filters.command import Command
 from aiogram.fsm.context import FSMContext
-from dotenv import load_dotenv
 
 from api.fetch_prediction import fetch_prediction
 from models import PredictRequest
+from const import TELEGRAM_BOT_TOKEN
 
 router = Router()
 storage = MemoryStorage()
-load_dotenv()
-TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 
 async def main():
     dp = Dispatcher(storage=storage)
     dp.include_router(router)
-    bot = Bot(TOKEN)
+    bot = Bot(TELEGRAM_BOT_TOKEN)
     await dp.start_polling(bot)
 
 
