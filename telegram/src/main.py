@@ -2,12 +2,14 @@ import asyncio
 import logging
 import os
 
+from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram import Bot, Dispatcher, Router, types
 from aiogram.filters.command import Command
 from aiogram.fsm.context import FSMContext
 from dotenv import load_dotenv
 
-from aiogram.fsm.storage.memory import MemoryStorage
+from api.fetch_prediction import fetch_prediction
+from models import PredictRequest
 
 router = Router()
 storage = MemoryStorage()
@@ -35,9 +37,18 @@ async def cmd_start(message: types.Message, state: FSMContext):
 @router.message()
 async def conversation(message: types.Message, state: FSMContext):
     user_input = message.text
-    answer = get_answer(user_input)
+    if user_input:
+        try:
+            response = await fetch_prediction(PredictRequest(question=user_input))
+            answer = response.answer
+            cls_1 = f'Классификатор 1 уровня: {response.class_1}'
+            cls_2 = f'Классификатор 2 уровня: {response.class_2}'
+            response = f'{answer}\n\n{cls_1}\n{cls_2}'
 
-    await message.answer(answer)
+        except Exception as e:
+            response = "Произошла ошибка"
+            raise e
+        await message.answer(response)
 
 
 @router.message(Command("stop"))
