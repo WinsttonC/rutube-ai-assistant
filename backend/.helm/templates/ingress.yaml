@@ -6,17 +6,6 @@ metadata:
 {{- end }}
 spec:
   {{- with .Values.service }}
-  rules:
-    - host: bot-backend.example
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ .name }}
-                port:
-                  number: {{ .port }}
   defaultBackend:
     service:
       name: {{ .name }}

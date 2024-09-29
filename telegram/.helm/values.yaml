@@ -21,6 +21,6 @@ configmap:
   name: rutube-telegram-configmap
   values:
     BACKEND_BASE_URL: 'http://rutube-backend-service'
-    TELEGRAM_BOT_TOKEN: '7958174211:AAHleV9w6AKx1ANStfr7TeAnt6t0DtXEbgU'
+    TELEGRAM_BOT_TOKEN: '7614008691:AAFIQqegkmn89ioF5J7ei7d4njbHXtoFSHM'
 
   
